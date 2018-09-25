@@ -1,0 +1,105 @@
+:root {
+  --text-main: #707070;
+  --text-light: #CDCDCD;
+}
+
+body {
+  font-size: 18px;
+  color: var(--text-main);
+}
+
+a {
+  color: var(--text-main);
+}
+
+.container {
+  padding: 2rem 3rem;
+  /* display: flex;
+  flex-direction: column; */
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.search-container {
+  position: relative;
+  margin-bottom: 1rem;
+  width: 50%;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--text-light);
+}
+
+.svg-sort {
+  position: absolute;
+  left: 0;
+  bottom: 10px;
+  color: var(--text-main);
+  font-size: 1.5rem;
+}
+
+.search-container > input {
+  margin-left: 2rem;
+  padding-right: 4rem;
+  color: var(--text-main);
+  outline: 0;
+  width: 100%;
+}
+
+.add-company {
+  font-family: 'Poiret One', cursive;
+  font-size: 1.2rem;
+  border: none;
+  background: none;
+}
+
+.svg-add {
+  position: absolute !important;
+  right: 0;
+  bottom: 10px;
+  font-size: 1.2rem;
+  padding: 0.3rem;
+  background-color: var(--text-main);
+  color: white;
+  border-radius: 1.5rem;
+  cursor: pointer;
+}
+
+.header {
+  font-family: 'Space Mono', monospace;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--text-main);
+  white-space: pre-line;
+}
+
+.table-container {
+  margin-top: 2rem;
+  /* background-color: var(--text-light); */
+  /* height: 20rem; */
+}
+
+.poem {
+  font-family: 'Space Mono', monospace;
+  margin-top: 3rem;
+  white-space: pre-line;
+  font-size: 0.85rem;
+}
+
+.footer {
+  font-family: 'Space Mono', monospace;
+  margin-top: 5rem;
+  font-size: 0.75rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.links {
+  display: grid;
+  grid-template-columns: auto auto auto auto auto;
+  grid-column-gap: 0.5rem;
+  justify-content: start;
+}
