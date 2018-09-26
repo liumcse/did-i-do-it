@@ -1,16 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Input from '@material-ui/core/Input';
 import IconButton from '@material-ui/core/IconButton';
-import { Description as MoreIcon, Edit as EditIcon } from '@material-ui/icons';
-import Modal from '@material-ui/core/Modal';
+import {
+  /* Description as MoreIcon,*/ Edit as EditIcon,
+} from '@material-ui/icons';
 
 const styles = theme => ({
   root: {
@@ -25,19 +24,6 @@ const styles = theme => ({
     margin: theme.spacing.unit,
   },
 });
-
-let id = 0;
-function createData(company, role, apply_date, location, status) {
-  id += 1;
-  return { id, company, role, apply_date, location, status };
-}
-
-// const rows = [
-//   createData("Uber", "Software Engineer", "Sept 25, 2018", "Seattle, WA", "Pending"),
-//   createData("Airbnb", "Software Engineer", "Sept 26, 2018", "San Francisco, CA", "No offer"),
-//   createData("Slack", "Front End Engineer", "Sept 23, 2018", "Boston, MA", "No offer"),
-//   createData("Facebook", "Front End Engineer", "Sept 26, 2018", "Multiple", "No offer")
-// ];
 
 function TableView(props) {
   const { classes, data } = props;
@@ -67,11 +53,21 @@ function TableView(props) {
                 <TableCell>{row.location}</TableCell>
                 <TableCell>{row.status}</TableCell>
                 <TableCell>
-                  <IconButton className={classes.button} aria-label="more">
+                  {/* <IconButton className={classes.button} aria-label="more">
                     <MoreIcon />
-                  </IconButton>
+                  </IconButton> */}
                   <IconButton className={classes.button} aria-label="edit">
-                    <EditIcon />
+                    <EditIcon
+                      onClick={() =>
+                        props.showModal('EDIT_APPLICATION', {
+                          index: index,
+                          data: row,
+                          handleClose: props.hideModal,
+                          editApplication: props.editApplication,
+                          removeApplication: props.removeApplication,
+                        })
+                      }
+                    />
                   </IconButton>
                 </TableCell>
               </TableRow>
@@ -86,6 +82,7 @@ function TableView(props) {
 TableView.propTypes = {
   classes: PropTypes.object.isRequired,
   data: PropTypes.array.isRequired,
+  showModal: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles)(TableView);

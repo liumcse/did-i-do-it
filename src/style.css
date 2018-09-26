@@ -110,3 +110,18 @@ a {
   grid-column-gap: 0.5rem;
   justify-content: start;
 }
+
+@media screen and (max-width: 762px) {
+  .row {
+    display: block;
+    text-align: center;
+  }
+
+  .search-container {
+    width: 100%;
+  }
+
+  .search-container > input {
+    margin-top: 2rem;
+  }
+}

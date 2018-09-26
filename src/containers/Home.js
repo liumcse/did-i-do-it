@@ -1,15 +1,21 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Sort as SortIcon, Add as AddIcon } from '@material-ui/icons';
-import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
-import NewApplicationModal from '../components/NewApplicationModal';
+// import ModalContainer from '../components/ModalContainer';
 import TableView from '../components/TableView';
-import { newApplication } from '../actions';
+import {
+  addApplication,
+  editApplication,
+  removeApplication,
+  showModal,
+  hideModal,
+} from '../actions';
 
 class Home extends React.Component {
   state = {
     modalOpen: false,
+    companyName: null,
   };
 
   closeModal = () => {
@@ -18,6 +24,10 @@ class Home extends React.Component {
 
   openModal = () => {
     this.setState({ modalOpen: true });
+  };
+
+  handleInput = e => {
+    this.setState({ companyName: e.target.value });
   };
 
   render() {
@@ -30,25 +40,39 @@ class Home extends React.Component {
           </div>
           <div className="search-container">
             <SortIcon className="svg-sort" />
-            <input className="add-company" placeholder="Add a company..." />
+            <input
+              id="add-company"
+              className="add-company"
+              placeholder="Add a company..."
+              onChange={this.handleInput}
+            />
             <IconButton
               className="button-add"
               aria-label="Add"
               size="small"
-              onClick={this.openModal}
+              onClick={() =>
+                this.props.showModal('ADD_APPLICATION', {
+                  companyName: this.state.companyName,
+                  addApplication: this.props.addApplication,
+                  handleClose: this.props.hideModal,
+                })
+              }
             >
               <AddIcon />
             </IconButton>
-            <NewApplicationModal
-              companyName="Google"
-              newApplication={this.props.newApplication}
-              open={this.state.modalOpen}
-              handleClose={this.closeModal}
-            />
           </div>
         </div>
         <div className="table-container">
-          <TableView data={this.props.applicationList} />
+          {this.props.applicationList &&
+            this.props.applicationList.length > 0 && (
+              <TableView
+                data={this.props.applicationList}
+                editApplication={this.props.editApplication}
+                removeApplication={this.props.removeApplication}
+                showModal={this.props.showModal}
+                hideModal={this.props.hideModal}
+              />
+            )}
         </div>
         <div className="poem">
           Did you do it?
@@ -62,15 +86,11 @@ class Home extends React.Component {
         <div className="footer">
           <div className="links">
             <div>
-              <a href="#">Github</a>
+              <a href="https://github.com/lyming90/did-i-do-it">Github</a>
             </div>
             <div />
             <div>
-              <a href="#">Facebook</a>
-            </div>
-            <div />
-            <div>
-              <a href="#">Author</a>
+              <a href="https://csming.com">Author</a>
             </div>
           </div>
           <div className="copyright">2018 DIDI</div>
@@ -85,7 +105,12 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  newApplication: data => dispatch(newApplication(data)),
+  addApplication: data => dispatch(addApplication(data)),
+  editApplication: (index, data) => dispatch(editApplication(index, data)),
+  removeApplication: index => dispatch(removeApplication(index)),
+  showModal: (modalType, modalProps) =>
+    dispatch(showModal(modalType, modalProps)),
+  hideModal: () => dispatch(hideModal()),
 });
 
 export default connect(

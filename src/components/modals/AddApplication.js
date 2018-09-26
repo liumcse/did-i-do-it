@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-// import { PersonOutline as RoleIcon } from '@material-ui/icons';
-// import InputAdornment from '@material-ui/core/InputAdornment';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -23,22 +21,23 @@ const styles = theme => ({
   },
 });
 
-const NewApplicationModal = props => {
-  const { classes } = props;
+const AddApplication = props => {
+  const { classes, companyName } = props;
   const add = () => {
-    props.newApplication({
-      company: '233',
-      role: '233',
-      applyDate: '2333',
-      location: '2333',
-      status: '23333',
-      memo: '23333',
+    props.addApplication({
+      company: companyName,
+      role: document.querySelector('#role').value,
+      applyDate: document.querySelector('#applyDate').value,
+      location: document.querySelector('#location').value,
+      status: document.querySelector('#status').value,
+      memo: document.querySelector('#memo').value,
     });
+    props.handleClose();
   };
 
   return (
     <Dialog
-      open={props.open}
+      open
       onClose={props.handleClose}
       aria-labelledby="form-dialog-title"
     >
@@ -92,7 +91,7 @@ const NewApplicationModal = props => {
             type="text"
             fullWidth
             multiline
-            placeholder="Example: summer 2019"
+            placeholder="Example: Summer 2019"
           />
         </form>
       </DialogContent>
@@ -108,10 +107,11 @@ const NewApplicationModal = props => {
   );
 };
 
-NewApplicationModal.propTypes = {
-  open: PropTypes.bool.isRequired,
+AddApplication.propTypes = {
+  // open: PropTypes.bool.isRequired,
+  addApplication: PropTypes.func.isRequired,
   handleClose: PropTypes.func.isRequired,
-  companyName: PropTypes.string.isRequired,
+  companyName: PropTypes.string,
 };
 
-export default withStyles(styles)(NewApplicationModal);
+export default withStyles(styles)(AddApplication);

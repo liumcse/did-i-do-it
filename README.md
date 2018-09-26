@@ -1,5 +1,6 @@
 # Did I Do It
 
-**Work in progress**
+Manage your job applications, forget no more :D
 
-![preview](./assets/preview.png)
+![preview_1](./assets/preview_1.png)
+![preview_2](./assets/preview_2.png)
