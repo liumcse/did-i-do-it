@@ -92,6 +92,15 @@ class Home extends React.Component {
             <div>
               <a href="https://csming.com">Author</a>
             </div>
+            <div
+              className="fb-like"
+              data-href="https://didi.csming.com"
+              data-layout="button_count"
+              data-action="like"
+              data-size="small"
+              data-show-faces="true"
+              data-share="false"
+            />
           </div>
           <div className="copyright">2018 DIDI</div>
         </div>
